@@ -1,0 +1,2038 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compilado de Matemática</title>
+    <link rel="icon" type="image/x-icon" href="favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --deep-purple: #1a0634;
+            --dark-purple: #2a0b3a;
+            --medium-purple: #7c3aed;
+            --light-purple: #a78bfa;
+            --pink: #ec4899;
+            --light-pink: #f9a8d4;
+            --white: #ffffff;
+            --black: #1a1a1a;
+            --light-gray: #f0e6ff;
+            --card-bg: #ffffff;
+            --gradient-hero: linear-gradient(135deg, #1a0634 0%, #4c1d95 100%);
+            --gradient-section: linear-gradient(135deg, #7c3aed 0%, #c026d3 100%);
+            --gradient-accent: linear-gradient(135deg, #a78bfa 0%, #f0abfc 100%);
+            --gradient-title: linear-gradient(135deg, #f37cb7 0%, #ae87f0 100%);
+            --gradient-footer: linear-gradient(135deg, #2a0b3a 0%, #1a0634 100%);
+            --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --shadow-heavy: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --shadow-glow: 0 0 40px rgba(167, 139, 250, 0.3);
+            --shadow-text: 0 0 10px rgba(255, 255, 255, 0.7);
+            --transition-smooth: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+            --transition-bounce: all 0.6s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            color: var(--black);
+            background: var(--dark-purple);
+            background-attachment: fixed;
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--gradient-footer);
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-heavy);
+            border-bottom: 2px solid var(--medium-purple);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--light-pink);
+            background: var(--gradient-title);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-link {
+            color: var(--light-purple);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link i {
+            font-size: 1.2rem;
+        }
+
+        .nav-link:hover {
+            background: rgba(167, 139, 250, 0.2);
+            color: var(--light-pink);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 6rem 3rem;
+            background: var(--gradient-hero);
+            border-radius: 30px;
+            color: white;
+            box-shadow: var(--shadow-heavy);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            margin-top: 20px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(167, 139, 250, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            animation: pulse 15s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: slideInDown 1s ease-out;
+            background: var(--gradient-title);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 1px;
+            transform: translateZ(50px);
+        }
+
+        .hero p {
+            font-size: 1.6rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 2;
+            font-weight: 300;
+            animation: slideInUp 1s ease-out 0.3s both;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f1aed3 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transform: translateZ(30px);
+        }
+
+        @keyframes slideInDown {
+            from { transform: translateY(-50px) translateZ(50px); opacity: 0; }
+            to { transform: translateY(0) translateZ(50px); opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(50px) translateZ(30px); opacity: 0; }
+            to { transform: translateY(0) translateZ(30px); opacity: 1; }
+        }
+
+        .site-footer {
+            background: var(--gradient-footer);
+            color: white;
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+            position: relative;
+            overflow: hidden;
+            border-top: 2px solid var(--medium-purple);
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-purple);
+            display: inline-block;
+            background: var(--gradient-title);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        .footer-links {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .footer-links li::before {
+            position: absolute;
+            left: 0;
+            color: #7e678da6;
+        }
+
+        .footer-links a {
+            color: var(--light-pink);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            display: inline-block;
+            padding: 5px 0;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+            transform: translateX(5px);
+        }
+
+        .footer-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--light-purple);
+            flex-shrink: 0;
+        }
+
+        .copyright {
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(167, 139, 250, 0.3);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+        }
+
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background: radial-gradient(circle at center, var(--deep-purple) 0%, var(--dark-purple) 100%);
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--light-purple);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 8s ease-in-out infinite;
+            filter: drop-shadow(0 0 5px var(--light-purple));
+        }
+
+        .symbol-particle {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.2;
+            color: var(--light-pink);
+            animation: float 15s ease-in-out infinite;
+            filter: drop-shadow(0 0 8px rgba(236, 72, 153, 0.3));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            50% { transform: translateY(-40px) rotate(180deg) scale(1.1); }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .toc {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow-medium);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+        }
+
+        .toc:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .toc::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient-accent);
+        }
+
+        .toc h2 {
+            font-family: 'Playfair Display', serif;
+            color: white;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            text-align: center;
+            position: relative;
+            background: var(--gradient-title);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .toc h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--gradient-accent);
+            border-radius: 2px;
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .toc-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: var(--transition-smooth);
+            border: 1px solid rgba(167, 139, 250, 0.2);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            backdrop-filter: blur(10px);
+        }
+
+        .toc-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-heavy), 0 0 25px rgba(236, 72, 153, 0.4);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .toc-item a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: var(--transition-smooth);
+            z-index: 2;
+            position: relative;
+        }
+
+        .toc-item:hover a {
+            color: var(--light-pink);
+        }
+
+        .toc-item .icon {
+            font-size: 2.5rem;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: var(--transition-bounce);
+        }
+
+        .toc-item:hover .icon {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            margin-bottom: 3rem;
+            border-radius: 25px;
+            box-shadow: var(--shadow-medium);
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-heavy), 0 0 30px rgba(236, 72, 153, 0.3);
+        }
+
+        .section-header {
+            background: var(--gradient-section);
+            color: white;
+            padding: 2rem 3rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient-accent);
+        }
+
+        .section-header i {
+            margin-right: 1rem;
+            font-size: 2rem;
+        }
+
+        .section-content {
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            position: relative;
+            background: var(--gradient-title);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        h2::before {
+            content: '∫';
+            position: absolute;
+            left: -3rem;
+            top: 0;
+            color: var(--medium-purple);
+            font-size: 3rem;
+            font-weight: bold;
+            opacity: 0.5;
+            animation: rotate 20s linear infinite;
+        }
+
+        h3 {
+            color: white;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1.5rem 0;
+            padding: 1.2rem 1.8rem;
+            background: linear-gradient(90deg, rgba(167, 139, 250, 0.2) 0%, rgba(167, 139, 250, 0.05) 100%);
+            border-left: 5px solid var(--pink);
+            border-radius: 0 15px 15px 0;
+            position: relative;
+            transition: var(--transition-smooth);
+            box-shadow: var(--shadow-soft);
+        }
+
+        h3:hover {
+            background: linear-gradient(90deg, rgba(167, 139, 250, 0.3) 0%, rgba(167, 139, 250, 0.1) 100%);
+            transform: translateX(5px);
+        }
+
+        h3::before {
+            content: '▸';
+            position: absolute;
+            left: -2px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--pink);
+            font-size: 1.4rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        ul, ol {
+            margin: 1.5rem 0 1.5rem 2rem;
+        }
+
+        li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            padding-left: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        ul li::marker {
+            content: '◆ ';
+            color: var(--pink);
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+
+        .formula-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(167, 139, 250, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition-smooth);
+            font-size: 1.2rem;
+            border-left: 5px solid var(--medium-purple);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .formula-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-accent);
+        }
+
+        .formula-box::after {
+            content: '∑';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: var(--medium-purple);
+            font-size: 3rem;
+            opacity: 0.1;
+            font-family: 'Inter', sans-serif;
+            animation: rotate 40s linear infinite;
+        }
+
+        .formula-box:hover {
+            box-shadow: var(--shadow-medium), 0 0 20px rgba(236, 72, 153, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .example-box {
+            background: rgba(247, 240, 255, 0.1);
+            border-left: 6px solid var(--pink);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0 20px 20px 0;
+            position: relative;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition-smooth);
+            backdrop-filter: blur(10px);
+        }
+
+        .example-box::before {
+            content: 'Exemplo';
+            position: absolute;
+            top: -0.8rem;
+            left: 1.5rem;
+            background: var(--gradient-accent);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: var(--shadow-soft);
+            z-index: 2;
+        }
+
+        .example-box:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-3px);
+        }
+
+        .math-symbol {
+            color: var(--light-purple);
+            font-weight: bold;
+            font-size: 1.3em;
+            background: var(--gradient-title);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(167, 139, 250, 0.2) 0%, rgba(236, 72, 153, 0.2) 100%);
+            padding: 0.8rem 0.8rem;
+            border-radius: 8px;
+            font-weight: 600;
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            display: block;
+            color: white;
+            width: 100%;
+            box-sizing: border-box;
+            margin: 0.5rem 0;
+        }
+
+        code {
+            background: linear-gradient(135deg, rgba(141, 111, 233, 0.342) 0%, rgba(231, 219, 255, 0.2) 100%);
+            color: #e2deed;
+            padding: 0.3rem 0.6rem;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 500;
+            border: 1px solid rgba(167, 139, 250, 0.425);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: 20px;
+            box-shadow: var(--shadow-medium);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(167, 139, 250, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: var(--gradient-section);
+            color: white;
+            padding: 1.5rem;
+            text-align: left;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: sticky;
+            top: 0;
+        }
+
+        td {
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid rgba(167, 139, 250, 0.1);
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        tr:nth-child(even) {
+            background: linear-gradient(135deg, rgba(247, 240, 255, 0.05) 0%, rgba(231, 219, 255, 0.05) 100%);
+        }
+
+        tr:hover {
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition-smooth);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-heavy);
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition-smooth);
+            border: none;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            box-shadow: 0 0 25px rgba(249, 168, 212, 0.7);
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .hero {
+                padding: 3rem 1.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .section-content {
+                padding: 2rem;
+            }
+            
+            .toc-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h2::before {
+                display: none;
+            }
+            
+            .formula-box, .example-box {
+                margin: 1rem 0;
+                padding: 1.5rem;
+            }
+            
+            .toc {
+                padding: 2rem;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+                padding: 10px;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-purple);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-accent);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gradient-section);
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        }
+        
+        .gate-symbol {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: bold;
+            background: var(--gradient-title);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            padding: 0 0.3rem;
+        }
+        
+        .data-analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .analysis-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid rgba(167, 139, 250, 0.2);
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition-smooth);
+        }
+        
+        .analysis-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-heavy);
+        }
+        
+        .analysis-card h4 {
+            color: var(--light-pink);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .regression-formula {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+            text-align: center;
+            font-size: 1.3rem;
+            border-left: 4px solid var(--pink);
+            color: var(--white);
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 0.8rem 1.5rem;
+            padding-left: 3rem;
+            border-radius: 50px;
+            border: none;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            color: white;
+            font-size: 1.1rem;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition-smooth);
+        }
+
+        #searchInput::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        #searchInput:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--light-purple), var(--shadow-glow);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--light-pink);
+            z-index: 1;
+        }
+
+        .search-highlight {
+            background: linear-gradient(120deg, rgba(236, 72, 153, 0.4) 0%, rgba(167, 139, 250, 0.4) 100%);
+            padding: 0.1rem 0.3rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.7);
+            display: none;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(167, 139, 250, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    
+    <header class="site-header glass-effect">
+        <div class="header-container">
+            <a href="#" class="logo">
+                <div class="logo-icon"><i class="fa-solid fa-heart" style="color: #ba52ff;"></i></div>
+                <div class="logo-text">MathCompilado</div>
+            </a>
+            
+            <nav class="nav-menu">
+                <a href="#operacoes-bases" class="nav-link"><i class="fas fa-calculator"></i> Bases</a>
+                <a href="#teoria-conjuntos" class="nav-link"><i class="fas fa-project-diagram"></i> Conjuntos</a>
+                <a href="#algebra-boole" class="nav-link"><i class="fas fa-microchip"></i> Álgebra</a>
+                <a href="#matrizes" class="nav-link"><i class="fas fa-th"></i> Matrizes</a>
+                <a href="#estatistica" class="nav-link"><i class="fas fa-chart-line"></i> Estatística</a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <div class="container">
+        <div class="hero glass-effect">
+            <h1> Compilado de Matemática</h1>
+            <p>Todos os conceitos fundamentais da matemática aplicada à informática</p>
+            
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="searchInput" placeholder="Pesquisar conceitos (ex: matriz, boole, probabilidade...)">
+            </div>
+        </div>
+
+        <div class="no-results glass-effect" id="noResults">
+            <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+            <p>Nenhum resultado encontrado para "<span id="searchTerm"></span>"</p>
+            <p>Tente usar termos como: matriz, álgebra, probabilidade, binário, etc.</p>
+        </div>
+
+        <nav class="toc fade-in glass-effect">
+            <h2><i class="fas fa-list-ul"></i> Índice Completo</h2>
+            <div class="toc-grid">
+                <div class="toc-item">
+                    <a href="#operacoes-bases">
+                        <span class="icon"><i class="fas fa-calculator"></i></span>
+                        Operações com Bases
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#teoria-conjuntos">
+                        <span class="icon"><i class="fas fa-project-diagram"></i></span>
+                        Teoria de Conjuntos e Lógica
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#algebra-boole">
+                        <span class="icon"><i class="fas fa-microchip"></i></span>
+                        Álgebra de Boole
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#matrizes">
+                        <span class="icon"><i class="fas fa-th"></i></span>
+                        Matrizes e Operações
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#estatistica">
+                        <span class="icon"><i class="fas fa-chart-line"></i></span>
+                        Estatística e Probabilidade
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#analise-dados">
+                        <span class="icon"><i class="fas fa-chart-bar"></i></span>
+                        Análise de Dados
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <section class="section fade-in glass-effect" id="operacoes-bases">
+            <div class="section-header">
+                <i class="fas fa-calculator"></i> Operações com Bases
+            </div>
+            <div class="section-content">
+                <h2>Noção de base de um sistema de representação</h2>
+                
+                <p>Um número é representado por um conjunto de símbolos (algarismos) que dependem da notação habitual e da base utilizada. Em sistemas posicionais, a ordem dos algarismos altera o valor do número.</p>
+
+                <div class="example-box">
+                    <p><strong>Exemplo:</strong> No sistema decimal, <code>529</code> e <code>295</code> utilizam os mesmos algarismos, mas têm valores diferentes:</p>
+                    <div class="formula-box">
+                        529 = 500 + 20 + 9<br>
+                        295 = 200 + 90 + 5
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-clock"></i> Exemplos de bases utilizadas habitualmente</h3>
+                
+                <p><span class="highlight">Base 60 (sexagesimal):</span> Utilizada para tempo (1 hora = 60 minutos, 1 minuto = 60 segundos). Exemplo: 3h25min24seg.</p>
+                
+                <p><span class="highlight">Base 24:</span> Utilizada para horas em um dia (1 dia = 24 horas). Exemplo: 5d13h.</p>
+
+                <h3><i class="fas fa-exchange-alt"></i> Conversão entre bases</h3>
+                
+                <p><strong>Conversão Habitual:</strong></p>
+                <p>Para converter um número de uma base qualquer para a base decimal, multiplica-se cada algarismo pela base elevada à posição do algarismo (começando da direita para a esquerda com a posição 0). Por exemplo, para converter 1101₂ para base 10:</p>
+
+                <div class="formula-box">
+                    1 × 2³ + 1 × 2² + 0 × 2¹ + 1 × 2⁰ = 1 × 8 + 1 × 4 + 0 × 2 + 1 × 1 = 8 + 4 + 0 + 1 = 13₁₀
+                </div>
+                
+                <p>Para converter da base decimal para outra base, utiliza-se o método das divisões sucessivas pela base desejada, anotando os restos. O número na nova base é formado pelos restos, lidos de baixo para cima.</p>
+
+                <h3><i class="fas fa-bolt"></i> Conversões rápidas entre as bases 2, 8 e 16</h3>
+                
+                <ul>
+                    <li><strong>Binário para Octal:</strong> Agrupar os dígitos binários em grupos de três, da direita para a esquerda, e converter cada grupo para seu equivalente octal.</li>
+                    <li><strong>Binário para Hexadecimal:</strong> Agrupar os dígitos binários em grupos de quatro, da direita para a esquerda, e converter cada grupo para seu equivalente hexadecimal.</li>
+                    <li><strong>Octal para Binário:</strong> Converter cada dígito octal para seu equivalente binário de três dígitos.</li>
+                    <li><strong>Hexadecimal para Binário:</strong> Converter cada dígito hexadecimal para seu equivalente binário de quatro dígitos.</li>
+                </ul>
+                
+                <h3><i class="fas fa-exclamation-triangle"></i> Limitação de representação</h3>
+                
+                <p>Devido ao número limitado de bits para representação, pode haver perda de precisão para números muito grandes ou muito pequenos, ou para números com muitas casas decimais.</p>
+                
+                <p><strong>Representação de números não inteiros:</strong> Utiliza-se a vírgula (ou ponto) e potências negativas da base. Exemplo: 0.1₂ = 1 × 2⁻¹ = 0.5₁₀.</p>
+
+                <h3><i class="fas fa-plus"></i> Operações aritméticas na base 2</h3>
+                
+                <p><strong>Adição no sistema binário:</strong></p>
+                <p>As regras básicas são:</p>
+                <ul>
+                    <li><span class="math-symbol">0 + 0 = 0</span></li>
+                    <li><span class="math-symbol">0 + 1 = 1</span></li>
+                    <li><span class="math-symbol">1 + 0 = 1</span></li>
+                    <li><span class="math-symbol">1 + 1 = 0</span> (e vai 1)</li>
+                </ul>
+
+                <div class="example-box">
+                    <p><strong>Exemplo:</strong> 1011₂ + 110₂</p>
+                    <div class="formula-box">
+                          1011<br>
+                        +  110<br>
+                        ------<br>
+                         10001
+                    </div>
+                </div>
+                
+                <p><strong>Multiplicação no sistema binário:</strong></p>
+                <p>Similar à multiplicação decimal, mas usando apenas 0s e 1s.</p>
+                
+                <div class="example-box">
+                    <p><strong>Exemplo:</strong> 1101₂ × 101₂</p>
+                    <div class="formula-box">
+                         1101<br>
+                        × 101<br>
+                        --------<br>
+                         1101   (1101 × 1)<br>
+                        0000    (1101 × 0, deslocado)<br>
+                       1101     (1101 × 1, deslocado)<br>
+                       --------<br>
+                       1000001  (soma dos resultados)
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-code"></i> Representação em complemento para 2</h3>
+                
+                <p>A representação em complemento para 2 é um método para representar números inteiros com sinal em sistemas binários. É amplamente utilizada em computadores porque simplifica as operações aritméticas, especialmente a subtração, que pode ser tratada como uma adição.</p>
+
+                <p><strong>Para obter o complemento para 2 de um número binário:</strong></p>
+                <ol>
+                    <li><strong>Inverter todos os bits:</strong> Trocar 0s por 1s e 1s por 0s (obter o complemento para 1).</li>
+                    <li><strong>Adicionar 1 ao resultado:</strong> Somar 1 ao número obtido no passo anterior.</li>
+                </ol>
+
+                <div class="example-box">
+                    <p><strong>Exemplo:</strong> Representar -5 em complemento para 2 (usando 8 bits)</p>
+                    <ol>
+                        <li>Representação binária de 5: <code>00000101</code></li>
+                        <li>Inverter todos os bits (complemento para 1): <code>11111010</code></li>
+                        <li>Adicionar 1: <code>11111010 + 1 = 11111011</code></li>
+                    </ol>
+                    <p>Assim, -5 em complemento para 2 é <code>11111011</code>.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in glass-effect" id="teoria-conjuntos">
+            <div class="section-header">
+                <i class="fas fa-project-diagram"></i> Teoria de Conjuntos e Lógica
+            </div>
+            <div class="section-content">
+                <h2>Representação de conjuntos, relação de pertença e inclusão de conjuntos</h2>
+                
+                <p><strong>Conjunto:</strong> Uma coleção de elementos (ou objetos), normalmente representada por uma letra maiúscula do alfabeto latino. Pode ser definido de várias formas:</p>
+
+                <ul>
+                    <li><strong>Extensivamente:</strong> Enumerando todos os elementos. Exemplo: <code>B = {Teresa, Ana, Beatriz, Armando, Gustavo}</code></li>
+                    <li><strong>Por uma condição:</strong> Descrevendo uma propriedade que os elementos devem satisfazer. Exemplo: <code>A = {Nome próprio começado pela letra A na língua portuguesa}</code></li>
+                    <li><strong>Utilizando conjuntos anteriormente definidos:</strong> Exemplo: <code>C = {todos os nomes que estão simultaneamente no conjunto A e no conjunto B} = {Ana, Armando}</code></li>
+                </ul>
+
+                <h3><i class="fas fa-star"></i> Conjuntos Especiais</h3>
+                
+                <ul>
+                    <li><strong>Conjunto vazio (<span class="math-symbol">∅</span> ou <span class="math-symbol">{ }</span>):</strong> O conjunto que não contém elementos. É único.</li>
+                    <li><strong>Conjunto universal (<span class="math-symbol">U</span> ou <span class="math-symbol">𝕌</span>):</strong> Contém todos os elementos relevantes para um determinado contexto. Varia conforme o universo de trabalho.</li>
+                </ul>
+
+                <h3><i class="fas fa-link"></i> Operações associadas a conjuntos</h3>
+                
+                <ul>
+                    <li><strong>Pertença (<span class="math-symbol">∈</span>):</strong> Indica se um objeto ou elemento pertence a um conjunto. Exemplo: Teresa ∈ B (Teresa pertence ao conjunto B), Teresa ∉ A (Teresa não pertence ao conjunto A).</li>
+                    <li><strong>Continência ou Inclusão (<span class="math-symbol">⊂</span> ou <span class="math-symbol">⊆</span>):</strong> Diz-se que um conjunto é subconjunto, ou está contido, noutro conjunto se todos os elementos do primeiro conjunto pertencem ao segundo. Exemplo: C ⊂ B (C é subconjunto de B).</li>
+                    <li><strong>Igualdade de conjuntos:</strong> Dois conjuntos S e W são iguais se S ⊆ W e W ⊆ S.</li>
+                    <li><strong>Cardinal de um conjunto (<span class="math-symbol">#A</span>):</strong> O número de elementos que pertencem a um conjunto finito.</li>
+                </ul>
+
+                <h2>Operações sobre conjuntos: reunião, interseção, diferença e complementação</h2>
+                
+                <ul>
+                    <li><strong>Interseção de conjuntos (<span class="math-symbol">∩</span>):</strong> Dados dois conjuntos K e W, a interseção K ∩ W é o conjunto constituído pelos elementos que estão em comum aos dois conjuntos.</li>
+                    <li><strong>União (ou reunião) de conjuntos (<span class="math-symbol">∪</span>):</strong> Dados dois conjuntos K e W, a união K ∪ W é o conjunto constituído por todos os elementos que pertencem a K ou a W (ou a ambos).</li>
+                    <li><strong>Diferença de conjuntos (<span class="math-symbol">∖</span> ou <span class="math-symbol">-</span>):</strong> A diferença A ∖ B (ou A - B) é o conjunto de todos os elementos que pertencem a A mas não pertencem a B.</li>
+                    <li><strong>Complementar de um conjunto (<span class="math-symbol">Aᶜ</span> ou <span class="math-symbol">A'</span>):</strong> Dado um conjunto A e um conjunto universal U, o complementar de A (Aᶜ) é o conjunto de todos os elementos de U que não pertencem a A.</li>
+                </ul>
+
+                <div class="formula-box">
+                    <strong><i class="fas fa-balance-scale"></i> Leis de De Morgan:</strong><br>
+                    • (A ∪ B)ᶜ = Aᶜ ∩ Bᶜ<br>
+                    • (A ∩ B)ᶜ = Aᶜ ∪ Bᶜ
+                </div>
+
+                <h2>Cálculo proposicional: negação, conjunção, disjunção de proposições</h2>
+                
+                <p><strong>Operadores Lógicos:</strong></p>
+
+                <ul>
+                    <li><strong>Negação (<span class="math-symbol">¬</span>):</strong> Inverte o valor lógico de uma proposição. Se p é V, ¬p é F; se p é F, ¬p é V.</li>
+                    <li><strong>Conjunção (<span class="math-symbol">∧</span>):</strong> Representa 'e'. A conjunção p ∧ q é verdadeira apenas se p e q forem ambas verdadeiras.</li>
+                    <li><strong>Disjunção (<span class="math-symbol">∨</span>):</strong> Representa 'ou'. A disjunção p ∨ q é verdadeira se p ou q (ou ambas) forem verdadeiras. É a disjunção inclusiva.</li>
+                    <li><strong>Disjunção Exclusiva (<span class="math-symbol">⊕</span>):</strong> É verdadeira se p ou q forem verdadeiras, mas não ambas.</li>
+                    <li><strong>Implicação (<span class="math-symbol">⇒</span>):</strong> Se p então q. É falsa apenas se p for verdadeira e q for falsa.</li>
+                    <li><strong>Equivalência (<span class="math-symbol">⇔</span>):</strong> p se e somente se q. É verdadeira se p e q tiverem o mesmo valor lógico.</li>
+                </ul>
+
+                <h2>Tabelas de verdade</h2>
+                
+                <p>Uma tabela de verdade é uma ferramenta utilizada para avaliar o valor lógico de proposições compostas para todas as combinações possíveis de valores lógico das proposições simples que a compõem.</p>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>p</th>
+                                <th>q</th>
+                                <th>p ∧ q</th>
+                                <th>p ∨ q</th>
+                                <th>p ⊕ q</th>
+                                <th>p ⇒ q</th>
+                                <th>p ⇔ q</th>
+                                <th>¬p</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>V</td>
+                                <td>V</td>
+                                <td>V</td>
+                                <td>V</td>
+                                <td>F</td>
+                                <td>V</td>
+                                <td>V</td>
+                                <td>F</td>
+                            </tr>
+                            <tr>
+                                <td>V</td>
+                                <td>F</td>
+                                <td>F</td>
+                                <td>V</td>
+                                <td>V</td>
+                                <td>F</td>
+                                <td>F</td>
+                                <td>F</td>
+                            </tr>
+                            <tr>
+                                <td>F</td>
+                                <td>V</td>
+                                <td>F</td>
+                                <td>V</td>
+                                <td>V</td>
+                                <td>V</td>
+                                <td>F</td>
+                                <td>V</td>
+                            </tr>
+                            <tr>
+                                <td>F</td>
+                                <td>F</td>
+                                <td>F</td>
+                                <td>F</td>
+                                <td>F</td>
+                                <td>V</td>
+                                <td>V</td>
+                                <td>V</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in glass-effect" id="algebra-boole">
+            <div class="section-header">
+                <i class="fas fa-microchip"></i> Álgebra de Boole
+            </div>
+            <div class="section-content">
+                <h2>Definição e propriedades</h2>
+                
+                <p>A Álgebra de Boole é um ramo da matemática e da lógica que lida com valores de verdade (verdadeiro e falso), geralmente representados por 1 e 0, e operações lógicas. É fundamental para o design de circuitos digitais e programação de computadores.</p>
+
+                <h3><i class="fas fa-cogs"></i> Portas Lógicas</h3>
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Porta</th>
+                                <th>Símbolo</th>
+                                <th>Operação</th>
+                                <th>Tabela Verdade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>AND</td>
+                                <td><span class="gate-symbol">∧</span></td>
+                                <td>Saída 1 apenas se todas entradas 1</td>
+                                <td>00→0, 01→0, 10→0, 11→1</td>
+                            </tr>
+                            <tr>
+                                <td>OR</td>
+                                <td><span class="gate-symbol">∨</span></td>
+                                <td>Saída 1 se pelo menos uma entrada 1</td>
+                                <td>00→0, 01→1, 10→1, 11→1</td>
+                            </tr>
+                            <tr>
+                                <td>NOT</td>
+                                <td><span class="gate-symbol">¬</span></td>
+                                <td>Inverte a entrada</td>
+                                <td>0→1, 1→0</td>
+                            </tr>
+                            <tr>
+                                <td>NAND</td>
+                                <td><span class="gate-symbol">↑</span></td>
+                                <td>Negadação do AND</td>
+                                <td>00→1, 01→1, 10→1, 11→0</td>
+                            </tr>
+                            <tr>
+                                <td>NOR</td>
+                                <td><span class="gate-symbol">↓</span></td>
+                                <td>Negadação do OR</td>
+                                <td>00→1, 01→0, 10→0, 11→0</td>
+                            </tr>
+                            <tr>
+                                <td>XOR</td>
+                                <td><span class="gate-symbol">⊕</span></td>
+                                <td>Saída 1 se entradas diferentes</td>
+                                <td>00→0, 01→1, 10→1, 11→0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3><i class="fas fa-shapes"></i> Propriedades Fundamentais</h3>
+                
+                <div class="formula-box">
+                    <strong>Comutatividade:</strong><br>
+                    • A ∧ B = B ∧ A<br>
+                    • A ∨ B = B ∨ A<br><br>
+                    
+                    <strong>Associatividade:</strong><br>
+                    • (A ∧ B) ∧ C = A ∧ (B ∧ C)<br>
+                    • (A ∨ B) ∨ C = A ∨ (B ∨ C)<br><br>
+                    
+                    <strong>Distributividade:</strong><br>
+                    • A ∧ (B ∨ C) = (A ∧ B) ∨ (A ∧ C)<br>
+                    • A ∨ (B ∧ C) = (A ∨ B) ∧ (A ∨ C)<br><br>
+                    
+                    <strong>Identidade:</strong><br>
+                    • A ∧ 1 = A<br>
+                    • A ∨ 0 = A<br><br>
+                    
+                    <strong>Complemento:</strong><br>
+                    • A ∧ ¬A = 0<br>
+                    • A ∨ ¬A = 1<br><br>
+                    
+                    <strong>Idempotência:</strong><br>
+                    • A ∧ A = A<br>
+                    • A ∨ A = A<br><br>
+                    
+                    <strong>Absorção:</strong><br>
+                    • A ∧ (A ∨ B) = A<br>
+                    • A ∨ (A ∧ B) = A<br><br>
+                    
+                    <strong>Leis de De Morgan:</strong><br>
+                    • ¬(A ∧ B) = ¬A ∨ ¬B<br>
+                    • ¬(A ∨ B) = ¬A ∧ ¬B
+                </div>
+                
+                <h3><i class="fas fa-project-diagram"></i> Relação com Conjuntos e Lógica</h3>
+                
+                <p>As operações lógicas na Álgebra de Boole correspondem diretamente às operações com conjuntos:</p>
+                
+                <ul>
+                    <li>Conjunção (AND) ↔ Interseção (∩)</li>
+                    <li>Disjunção (OR) ↔ União (∪)</li>
+                    <li>Negação (NOT) ↔ Complementar (ᶜ)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section fade-in glass-effect" id="matrizes">
+            <div class="section-header">
+                <i class="fas fa-th"></i> Matrizes e Operações com Matrizes
+            </div>
+            <div class="section-content">
+                <h2>Matriz de um sistema linear e dimensão de uma matriz</h2>
+                
+                <p>Uma <strong>matriz</strong> é um conjunto bidimensional de números (elementos da matriz) ordenados em <strong>filas</strong> (linhas) e <strong>colunas</strong>. Uma matriz com <code>m</code> filas e <code>n</code> colunas é denominada uma "matriz <code>m</code> por <code>n</code>" (escrito <code>m × n</code>). A dimensão de uma matriz é dada pelo número de filas e colunas que possui.</p>
+
+                <div class="formula-box">
+                    <strong><i class="fas fa-table"></i> Representação Geral:</strong><br><br>
+                    A = [a₁₁  a₁₂  ...  a₁ₙ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;[a₂₁  a₂₂  ...  a₂ₙ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;[ :    :   ...   : ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;[aₘ₁  aₘ₂  ...  aₘₙ]
+                </div>
+
+                <p>Nesta matriz <code>A</code>, <code>aᵢⱼ</code> representa o elemento que se encontra na <code>i</code>-ésima fila e na <code>j</code>-ésima coluna.</p>
+
+                <h2>Tipos de matrizes especiais</h2>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th><i class="fas fa-icons"></i> Tipo</th>
+                                <th><i class="fas fa-info-circle"></i> Descrição</th>
+                                <th><i class="fas fa-table"></i> Exemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong><i class="fas fa-arrows-alt-h"></i> Matriz Linha</strong></td>
+                                <td>Tamanho <code>1 × n</code> (uma fila e <code>n</code> colunas)</td>
+                                <td><code>[a₁₁ a₁₂ a₁₃]</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong><i class="fas fa-arrows-alt-v"></i> Matriz Coluna</strong></td>
+                                <td>Tamanho <code>m × 1</code> (<code>m</code> filas e uma coluna)</td>
+                                <td><code>[a₁₁] [a₂₁] [a₃₁]</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong><i class="fas fa-square"></i> Matriz Quadrada</strong></td>
+                                <td>Mesmo número de filas e colunas (<code>n × n</code>)</td>
+                                <td><code>[a₁₁ a₁₂] [a₂₁ a₂₂]</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong><i class="fas fa-border-none"></i> Matriz Diagonal</strong></td>
+                                <td>Elementos fora da diagonal principal são zero</td>
+                                <td><code>[5 0 0] [0 3 0] [0 0 7]</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong><i class="fas fa-eye"></i> Matriz Identidade</strong></td>
+                                <td>Matriz diagonal com 1s na diagonal principal</td>
+                                <td><code>[1 0] [0 1]</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong><i class="fas fa-sync-alt"></i> Matriz Simétrica</strong></td>
+                                <td>Matriz igual à sua transposta (A = Aᵀ)</td>
+                                <td><code>[1 2 3] [2 4 5] [3 5 6]</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Operações com matrizes</h2>
+                
+                <h3><i class="fas fa-plus-circle"></i> 1. Adição de Matrizes</h3>
+                
+                <p>Duas matrizes podem ser somadas apenas se tiverem o mesmo tamanho. A soma é realizada elemento a elemento.</p>
+                
+                <p>Se <code>A = [aᵢⱼ]</code> e <code>B = [bᵢⱼ]</code> são matrizes <code>m × n</code>, então <code>A + B = [aᵢⱼ + bᵢⱼ]</code>.</p>
+
+                <div class="example-box">
+                    <div class="formula-box">
+                        [1  2] + [5  6] = [1+5  2+6] = [6   8]<br>
+                        [3  4]   [7  8]   [3+7  4+8]   [10 12]
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-times-circle"></i> 2. Produto de um Escalar por uma Matriz</h3>
+                
+                <p>Para multiplicar uma matriz por um escalar (um número), cada elemento da matriz é multiplicado por esse escalar.</p>
+
+                <div class="example-box">
+                    <div class="formula-box">
+                        2 × [1  2] = [2×1  2×2] = [2  4]<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;[3  4]   [2×3  2×4]   [6  8]
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-exchange-alt"></i> 3. Transposição de Matrizes (Aᵀ)</h3>
+                
+                <p>A transposta de uma matriz <code>A</code> é obtida trocando suas filas por colunas (ou vice-versa). Se <code>A</code> é uma matriz <code>m × n</code>, sua transposta <code>Aᵀ</code> será uma matriz <code>n × m</code>.</p>
+
+                <div class="example-box">
+                    <div class="formula-box">
+                        Se A = [1  2  3]<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4  5  6]<br><br>
+                        
+                        Então Aᵀ = [1  4]<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[2  5]<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3  6]
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-calculator"></i> 4. Multiplicação de Matrizes (A × B)</h3>
+                
+                <p>A multiplicação de duas matrizes <code>A</code> e <code>B</code> só é possível se o número de colunas da primeira matriz (<code>A</code>) for igual ao número de filas (linhas) da segunda matriz (<code>B</code>).</p>
+
+                <div class="example-box">
+                    <p><strong>Condição:</strong> Se <code>A</code> é <code>m × p</code> e <code>B</code> é <code>p × n</code>, então <code>C = A × B</code> será <code>m × n</code>.</p>
+                    <div class="formula-box">
+                        Se A = [1  2]  e  B = [5  6]<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3  4]         [7  8]<br><br>
+                        
+                        Então A × B = [(1×5)+(2×7)  (1×6)+(2×8)] = [19  22]<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(3×5)+(4×7)  (3×6)+(4×8)]   [43  50]
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in glass-effect" id="estatistica">
+            <div class="section-header">
+                <i class="fas fa-chart-line"></i> Estatística e Probabilidade
+            </div>
+            <div class="section-content">
+                <h2>A estatística como metodologia da investigação científica</h2>
+                
+                <p>A estatística é uma metodologia da investigação científica que lida com a recolha, organização, análise, interpretação e apresentação de dados. É utilizada para entender fenómenos, tomar decisões e fazer previsões em diversas áreas.</p>
+
+                <h3><i class="fas fa-microscope"></i> Estudos observacionais e experimentais</h3>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 30%;"><i class="fas fa-icons"></i> Tipo</th>
+                                <th><i class="fas fa-info-circle"></i> Descrição</th>
+                                <th><i class="fas fa-lightbulb"></i> Exemplo</th>
+                                <th><i class="fas fa-tools"></i> Características</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong><i class="fas fa-eye" style="color: var(--medium-purple);"></i> Observacionais</strong></td>
+                                <td>O pesquisador observa e mede variáveis sem intervir</td>
+                                <td>Relação entre hábitos alimentares e saúde</td>
+                                <td>
+                                    <span class="highlight"><i class="fas fa-search"></i> Observação passiva</span><br>
+                                    <span class="highlight"><i class="fas fa-chart-line"></i> Análise de correlação</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong><i class="fas fa-flask" style="color: var(--pink);"></i> Experimentais</strong></td>
+                                <td>O pesquisador manipula variáveis para observar efeitos</td>
+                                <td>Testar eficácia de medicamentos</td>
+                                <td>
+                                    <span class="highlight"><i class="fas fa-sliders-h"></i> Manipulação ativa</span><br>
+                                    <span class="highlight"><i class="fas fa-random"></i> Aleatorização</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3><i class="fas fa-database"></i> Processo de tratamento de dados</h3>
+                
+                <ul>
+                    <li><strong><i class="fas fa-download"></i> Recolha:</strong> Obtenção dos dados através de questionários, experimentos, observações, etc.</li>
+                    <li><strong><i class="fas fa-broom"></i> Limpeza:</strong> Processo de identificar e corrigir erros, inconsistências ou dados ausentes.</li>
+                    <li><strong><i class="fas fa-compress-alt"></i> Resumo:</strong> Organização e condensação dos dados em medidas descritivas.</li>
+                    <li><strong><i class="fas fa-chart-bar"></i> Apresentação:</strong> Visualização dos dados através de gráficos ou tabelas.</li>
+                </ul>
+
+                <h3><i class="fas fa-users"></i> Populações e amostras</h3>
+                
+                <ul>
+                    <li><strong>População:</strong> O conjunto completo de todos os elementos que possuem uma característica comum. Exemplo: Todos os alunos de uma escola.</li>
+                    <li><strong>Amostra:</strong> Um subconjunto da população selecionado para estudo. Exemplo: 100 alunos selecionados aleatoriamente.</li>
+                    <li><strong>Unidades Amostrais:</strong> Os elementos individuais da amostra.</li>
+                    <li><strong>Variáveis:</strong> As características medidas nas unidades amostras.</li>
+                </ul>
+
+                <h3><i class="fas fa-ruler"></i> A escala de Stevens</h3>
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th><i class="fas fa-layer-group"></i> Nível</th>
+                                <th><i class="fas fa-info-circle"></i> Descrição</th>
+                                <th><i class="fas fa-lightbulb"></i> Exemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Nominal</strong></td>
+                                <td>Categorias sem ordem ou hierarquia</td>
+                                <td>Gênero, cor dos olhos</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ordinal</strong></td>
+                                <td>Categorias com ordem, mas sem intervalos iguais</td>
+                                <td>Nível de escolaridade, classificação</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Intervalar</strong></td>
+                                <td>Dados numéricos com intervalos iguais, sem zero absoluto</td>
+                                <td>Temperatura em Celsius</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Razão</strong></td>
+                                <td>Dados numéricos com intervalos iguais e zero absoluto</td>
+                                <td>Altura, peso, idade</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3><i class="fas fa-filter"></i> Noções elementares sobre amostragem</h3>
+                
+                <p>Métodos para selecionar uma amostra representativa da população:</p>
+                <ul>
+                    <li><strong>Amostragem Aleatória Simples:</strong> Cada elemento tem igual probabilidade de ser selecionado.</li>
+                    <li><strong>Amostragem Estratificada:</strong> A população é dividida em estratos, e amostras são retiradas de cada estrato.</li>
+                    <li><strong>Amostragem Sistemática:</strong> Elementos são selecionados a intervalos regulares a partir de uma lista ordenada.</li>
+                    <li><strong>Amostragem por Conglomerados:</strong> A população é dividida em grupos, e alguns grupos são selecionados aleatoriamente.</li>
+                </ul>
+
+                <h2>Probabilidade e probabilidade condicional</h2>
+                
+                <h3><i class="fas fa-dice"></i> Noções de probabilidade</h3>
+                
+                <p>A probabilidade é uma medida da chance de um evento ocorrer. É um valor entre 0 e 1 (ou 0% e 100%), onde 0 indica impossibilidade e 1 indica certeza.</p>
+
+                <h3><i class="fas fa-balance-scale"></i> A axiomática de Kolmogorov</h3>
+                
+                <div class="formula-box">
+                    <strong><i class="fas fa-list-ol"></i> Axiomas Fundamentais:</strong><br><br>
+                    <strong>1. Não-negatividade:</strong> P(E) ≥ 0<br>
+                    <strong>2. Normalização:</strong> P(S) = 1<br>
+                    <strong>3. Aditividade:</strong> P(E₁ ∪ E₂ ∪ ...) = P(E₁) + P(E₂) + ...
+                </div>
+
+                <h3><i class="fas fa-link"></i> Probabilidade condicional</h3>
+                
+                <p>A probabilidade condicional de um evento B ocorrer, dado que um evento A já ocorreu, é denotada por <code>P(B|A)</code>:</p>
+
+                <div class="formula-box">
+                    <strong><i class="fas fa-equals"></i> Fórmula:</strong><br>
+                    P(B|A) = P(A ∩ B) / P(A), desde que P(A) > 0
+                </div>
+                
+                <h3><i class="fas fa-unlink"></i> Independência</h3>
+                
+                <p>Dois eventos A e B são independentes se a ocorrência de um não afeta a probabilidade de ocorrência do outro:</p>
+                <div class="formula-box">
+                    P(A ∩ B) = P(A) × P(B)
+                </div>
+
+                <h3><i class="fas fa-project-diagram"></i> Teoremas Importantes</h3>
+                
+                <div class="example-box">
+                    <p><strong><i class="fas fa-plus"></i> Teorema da Probabilidade Total:</strong></p>
+                    <p>Se E₁, E₂, ..., Eₙ formam uma partição do espaço amostral, então:</p>
+                    <div class="formula-box">
+                        P(A) = P(A|E₁)P(E₁) + P(A|E₂)P(E₂) + ... + P(A|Eₙ)P(Eₙ)
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <p><strong><i class="fas fa-exchange-alt"></i> Teorema de Bayes:</strong></p>
+                    <p>Descreve a probabilidade de um evento com base em conhecimento prévio:</p>
+                    <div class="formula-box">
+                        P(A|B) = [P(B|A) × P(A)] / P(B)
+                    </div>
+                    <p>Onde:</p>
+                    <ul>
+                        <li><code>P(A|B)</code> é a probabilidade a posteriori</li>
+                        <li><code>P(B|A)</code> é a verossimilhança</li>
+                        <li><code>P(A)</code> é a probabilidade a priori</li>
+                        <li><code>P(B)</code> é a evidência</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in glass-effect" id="analise-dados">
+            <div class="section-header">
+                <i class="fas fa-chart-bar"></i> Análise de Dados
+            </div>
+            <div class="section-content">
+                <h2>Análise inicial de dados: exploração de dados univariados</h2>
+                
+                <p>Envolve a análise de uma única variável por vez para entender sua distribuição, tendência central e variabilidade.</p>
+                
+                <div class="data-analysis-grid">
+                    <div class="analysis-card">
+                        <h4><i class="fas fa-ruler-combined"></i> Medidas de Tendência Central</h4>
+                        <ul>
+                            <li><strong>Média:</strong> Soma dos valores dividida pelo número de observações</li>
+                            <li><strong>Mediana:</strong> Valor que divide a amostra em duas partes iguais</li>
+                            <li><strong>Moda:</strong> Valor que aparece com maior frequência</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="analysis-card">
+                        <h4><i class="fas fa-expand-arrows-alt"></i> Medidas de Dispersão</h4>
+                        <ul>
+                            <li><strong>Amplitude:</strong> Diferença entre o maior e o menor valor</li>
+                            <li><strong>Variância:</strong> Média dos quadrados das diferenças em relação à média</li>
+                            <li><strong>Desvio Padrão:</strong> Raiz quadrada da variância</li>
+                            <li><strong>Quartis:</strong> Valores que dividem os dados em quatro partes iguais</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="analysis-card">
+                        <h4><i class="fas fa-chart-pie"></i> Representações Gráficas</h4>
+                        <ul>
+                            <li><strong>Histogramas:</strong> Distribuição de frequência de dados numéricos</li>
+                            <li><strong>Gráficos de Barras:</strong> Frequência de categorias de dados qualitativos</li>
+                            <li><strong>Box Plots:</strong> Distribuição dos dados mostrando mediana, quartis e outliers</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2>Exploração de dados bivariados</h2>
+                
+                <p>Envolve a análise da relação entre duas variáveis.</p>
+                
+                <div class="data-analysis-grid">
+                    <div class="analysis-card">
+                        <h4><i class="fas fa-project-diagram"></i> Tabelas de Contingência</h4>
+                        <p>Mostram a frequência conjunta de duas variáveis qualitativas.</p>
+                        <div class="formula-box" style="font-size: 1rem;">
+                            |       | Homem | Mulher | Total |<br>
+                            |-------|-------|--------|-------|<br>
+                            | Sim   | 30    | 45     | 75    |<br>
+                            | Não   | 20    | 15     | 35    |<br>
+                            | Total | 50    | 60     | 110   |
+                        </div>
+                    </div>
+                    
+                    <div class="analysis-card">
+                        <h4><i class="fas fa-braille"></i> Gráficos de Dispersão</h4>
+                        <p>Mostram a relação entre duas variáveis numéricas. Permitem identificar:</p>
+                        <ul>
+                            <li>Correlação positiva, negativa ou nula</li>
+                            <li>Tendências lineares ou não lineares</li>
+                            <li>Outliers e padrões interessantes</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="analysis-card">
+                        <h4><i class="fas fa-calculator"></i> Coeficiente de Correlação</h4>
+                        <p>Mede a força e direção da relação linear entre duas variáveis:</p>
+                        <div class="formula-box">
+                            r = [Σ(xᵢ - x̄)(yᵢ - ȳ)] / [√Σ(xᵢ - x̄)² * √Σ(yᵢ - ȳ)²]
+                        </div>
+                        <p>Valores entre -1 (correlação negativa perfeita) e 1 (correlação positiva perfeita).</p>
+                    </div>
+                </div>
+
+                <h2>Noções elementares sobre regressão</h2>
+                
+                <p>A regressão é uma técnica estatística utilizada para modelar a relação entre uma variável dependente e uma ou mais variáveis independentes.</p>
+                
+                <h3><i class="fas fa-chart-line"></i> Regressão Linear Simples</h3>
+                
+                <p>Modela a relação entre duas variáveis numéricas usando uma linha reta:</p>
+                
+                <div class="regression-formula">
+                    y = a + bx
+                </div>
+                
+                <p>Onde:</p>
+                <ul>
+                    <li><code>y</code> é a variável dependente (resposta)</li>
+                    <li><code>x</code> é a variável independente (explicativa)</li>
+                    <li><code>a</code> é o intercepto (valor de y quando x=0)</li>
+                    <li><code>b</code> é a inclinação (mudança em y para cada unitária mudança em x)</li>
+                </ul>
+                
+                <p><strong>Cálculo dos coeficientes:</strong></p>
+                <div class="formula-box">
+                    b = [nΣ(xy) - ΣxΣy] / [nΣ(x²) - (Σx)²]<br>
+                    a = ȳ - bx̄
+                </div>
+                
+                <div class="example-box">
+                    <p><strong>Exemplo:</strong> Para os pontos (1,2), (2,3), (3,5):</p>
+                    <div class="formula-box">
+                        n = 3<br>
+                        Σx = 6, Σy = 10, Σxy = 2+6+15=23, Σx²=1+4+9=14<br>
+                        b = [3×23 - 6×10] / [3×14 - 6²] = [69-60]/[42-36] = 9/6 = 1.5<br>
+                        a = (10/3) - 1.5×(6/3) ≈ 3.33 - 3 = 0.33<br>
+                        Equação: y = 0.33 + 1.5x
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3 class="footer-title">MathCompilado</h3>
+                <p>Compilado completo de conceitos matemáticos essenciais de tecnologia e informática.</p>
+                
+            
+            </div>
+            
+            <div class="footer-section">
+                <h3 class="footer-title">Links Rápidos</h3>
+                <ul class="footer-links">
+                    <li><a href="#operacoes-bases"><i class="fas fa-calculator"></i> Operações com Bases</a></li>
+                    <li><a href="#teoria-conjuntos"><i class="fas fa-project-diagram"></i> Teoria de Conjuntos</a></li>
+                    <li><a href="#algebra-boole"><i class="fas fa-microchip"></i> Álgebra de Boole</a></li>
+                    <li><a href="#matrizes"><i class="fas fa-th"></i> Matrizes</a></li>
+                    <li><a href="#estatistica"><i class="fas fa-chart-line"></i> Estatística</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3 class="footer-title"> Formanda</h3>
+                <div class="footer-contact">
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-user"></i></div>
+                        <div>Juliana Alves</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div>juabreudea.alves@gmail.com</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <div>Técnico/a Especialista em Tecnologias e Programação de Sistemas de Informação 2 - TETPSI</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fa-solid fa-user-tie"></i></div>
+                        <div>Formador: Leandro Martins</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fa-solid fa-superscript"></i></div>
+                        <div>UFCD: 5064 – Matemática</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 MathCompilado. Todos os direitos reservados.</p>
+ 
+        </div>
+    </footer>
+
+    <script>
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 100;
+            const symbols = ['∑', '∫', 'π', '∞', '√', '∛', '∜', '≠', '≈', '≡', '≅', '∝', '±', '×', '÷', '∆', '∇', '∂', '∅', '∎'];
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                if (i % 5 === 0) {
+                    particle.className = 'symbol-particle';
+                    particle.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                } else {
+                    particle.className = 'particle';
+                }
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                particle.style.fontSize = (Math.random() * 1.5 + 1.5) + 'rem';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        function observeElements() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        function setupSmoothScrolling() {
+            document.querySelectorAll('.toc-item a, .nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        function setupBackToTop() {
+            const backToTopBtn = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            });
+            
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const sections = document.querySelectorAll('.section');
+            const tocItems = document.querySelectorAll('.toc-item');
+            const noResults = document.getElementById('noResults');
+            const searchTermSpan = document.getElementById('searchTerm');
+            
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                let hasResults = false;
+                searchTermSpan.textContent = searchTerm;
+                
+                document.querySelectorAll('.search-highlight').forEach(el => {
+                    const parent = el.parentNode;
+                    parent.replaceChild(document.createTextNode(el.textContent), el);
+                });
+                
+                if (searchTerm === '') {
+                    sections.forEach(section => section.style.display = 'block');
+                    tocItems.forEach(item => item.style.display = 'flex');
+                    noResults.style.display = 'none';
+                    return;
+                }
+                
+                sections.forEach(section => {
+                    const sectionContent = section.textContent.toLowerCase();
+                    const sectionHeader = section.querySelector('.section-header').textContent.toLowerCase();
+                    
+                    if (sectionContent.includes(searchTerm) || sectionHeader.includes(searchTerm)) {
+                        section.style.display = 'block';
+                        hasResults = true;
+                        
+                        highlightText(section, searchTerm);
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+                
+                let tocHasResults = false;
+                tocItems.forEach(item => {
+                    const itemText = item.textContent.toLowerCase();
+                    if (itemText.includes(searchTerm)) {
+                        item.style.display = 'flex';
+                        tocHasResults = true;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                noResults.style.display = hasResults || tocHasResults ? 'none' : 'block';
+            });
+        }
+        
+        function highlightText(element, searchTerm) {
+            const regex = new RegExp(searchTerm, 'gi');
+            const childNodes = element.childNodes;
+            
+            childNodes.forEach(node => {
+                if (node.nodeType === 3) {
+                    const text = node.textContent;
+                    const matches = text.match(regex);
+                    
+                    if (matches) {
+                        const newText = text.replace(regex, match => 
+                            `<span class="search-highlight">${match}</span>`);
+                        
+                        const newNode = document.createElement('span');
+                        newNode.innerHTML = newText;
+                        node.parentNode.replaceChild(newNode, node);
+                    }
+                } else if (node.nodeType === 1) {
+                    highlightText(node, searchTerm);
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            observeElements();
+            setupSmoothScrolling();
+            setupBackToTop();
+            setupSearch();
+            
+            setTimeout(() => {
+                document.querySelectorAll('.fade-in').forEach(el => {
+                    el.classList.add('visible');
+                });
+            }, 300);
+        });
+    </script>
+</body>
+</html>
